@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             contacts.add(contact);
             contactsNames.add(Helper.getTitleName(contact));
         }
+
     }
     private void setAddBtn() {
         addBtn= (ImageButton) findViewById(R.id.addBtn);
@@ -121,6 +122,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+    }
+
+    @Override
+    protected void onDestroy() {
         removePreferences();
         SharedPreferences.Editor editor=settings.edit();
         int i=0;
@@ -131,11 +137,7 @@ public class MainActivity extends AppCompatActivity {
         }
         editor.putInt("SIZE",i);
         editor.commit();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+        super.onDestroy();
 
     }
 }
